@@ -50,7 +50,6 @@ public class Connector {
 							String s = "";
 							if (!(s=sc.nextLine().trim()).equals("")&&!s.isEmpty()&&s.length()>0) {
 								c.send(s);
-								System.out.println("next " + s);
 								c.readLock = true;
 								try {
 									Thread.sleep(500);
