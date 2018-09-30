@@ -52,15 +52,15 @@ public class Connector {
 								c.send(s);
 								System.out.println("next " + s);
 								c.readLock = true;
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								while (c.readLock) {
 									byte[] bytes = new byte[is.available()];
 									is.read(bytes);
-									try {
-										Thread.sleep(400);
-									} catch (InterruptedException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
 									String d = new String(bytes);
 									if (d.equals("end")) {
 										System.out.println("Connection closed");
