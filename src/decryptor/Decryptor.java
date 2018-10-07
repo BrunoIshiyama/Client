@@ -63,7 +63,6 @@ public class Decryptor {
 		}
 		pinCalc.interrupt();
 		dValue = d;
-		System.out.println(d);
 	}
 	public String decrypt(InputStream is) {
 		try {
