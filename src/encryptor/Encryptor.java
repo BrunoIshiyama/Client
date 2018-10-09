@@ -1,14 +1,12 @@
+/*
+ * essa classe 'e responsavel por encriptar as mensagens
+ */
 package encryptor;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.math.BigDecimal;
-
-/*
- * This class is responsible to Encrypt messages 
- */
 		
 public class Encryptor {
+	// chaves para encriptacao
 	private long publicKeyN;
 	private long publicKeyE;
 	
@@ -16,6 +14,7 @@ public class Encryptor {
 		publicKeyE = pkE;
 		publicKeyN = pkN;
 	}
+	// metodo responsavel por converter cada caractere da mensagem em valores ASCII 
 	private long[] convertMessage(String msg) {
 		long[] convMsg = new long[msg.length()];
 		for(int i = 0;i<convMsg.length;i++) {
@@ -23,10 +22,11 @@ public class Encryptor {
 		}
 		return convMsg;
 	}
-	
+	// metodo responsavel por encriptar a mensagem
 	public String encrypt(String msg) {
 		long[] convMsg = convertMessage(msg);
 		long[] eMsg = new long[convMsg.length];
+		//para cada caractere da mensagem
 		for(int i = 0 ; i<eMsg.length ; i++) {
 			BigDecimal bd = new BigDecimal(convMsg[i]);
 			bd = bd.pow((int)publicKeyE);

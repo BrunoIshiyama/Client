@@ -1,5 +1,5 @@
 /*
- * Essa classe é responsavel por conectar o cliente com o servidor 
+ * Essa classe 'e responsavel por conectar o cliente com o servidor 
  * Essa classe possui o main
  */
 package connection;
@@ -33,7 +33,7 @@ public class Connector {
 	static long primeP = 13;
 	static long primeQ = 31;
 	static long keyE = 11;
-	// essa chave normalmente é passada como uma multiplicacao, foi criada dessa
+	// essa chave normalmente 'e passada como uma multiplicacao, foi criada dessa
 	// forma com o intuito evidenciar que sao as chaves P e Q do servidor
 	static long serverKey = 19 * 23;
 
@@ -91,7 +91,7 @@ public class Connector {
 							// se a mensagem nao for um keep alive***
 							/*
 							 * Foi descoberto empiricamente no desenrolar desse projeto que o keep alive no
-							 * java é realizado por meio do envio de caracteres nulos.
+							 * java 'e realizado por meio do envio de caracteres nulos.
 							 * 
 							 */
 							if (!(s = sc.nextLine().trim()).equals("") && !s.isEmpty() && s.length() > 0) {
