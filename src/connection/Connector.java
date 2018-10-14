@@ -20,7 +20,7 @@ public class Connector {
 	private static Connector instance;
 	private static Socket clientSocket;
 	public static final int PORT = 9797;
-	public String host;
+	public String server;
 	// readLock 'e uma variavel responsavel por garantir que a mensagem recebida do
 	// servidor ser'a lida (funciona como um semaforo)
 	public boolean readLock = false;
@@ -42,9 +42,9 @@ public class Connector {
 	public static Encryptor enc = new Encryptor(serverKey, serverKeyE);
 
 	// Ao criar o objeto de conexao o socket 'e criado
-	private Connector(String host) throws UnknownHostException, IOException {
-		this.host = host;
-		clientSocket = new Socket(host, PORT);
+	private Connector(String server) throws UnknownHostException, IOException {
+		this.server = server;
+		clientSocket = new Socket(server, PORT);
 	}
 
 	// singleton para a conexao
@@ -69,10 +69,10 @@ public class Connector {
 	public static void connect() {
 		try {
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Digite o endereco IP do host:");
+			System.out.println("Type the server's IP address:");
 			String host = sc.nextLine();
 			// 172.115.13.95
-			System.out.println("Connecting to host...");
+			System.out.println("Connecting to Server...");
 			// chama o construtor para criar o socket e pedir a conexao para o servidor
 			Connector c = Connector.getInstance(host);
 			System.out.println("Connected to " + Connector.clientSocket.getInetAddress());
@@ -110,12 +110,6 @@ public class Connector {
 								while (c.readLock) {
 									// Desencripte a mensagem
 									String d = dec.decrypt(is);
-//									try {
-//										Thread.sleep(500);
-//									} catch (InterruptedException e) {
-//										// TODO Auto-generated catch block
-//										e.printStackTrace();
-//									}
 									// se a mensagem for de desligamento entao feche a conexao
 									if (d.trim().equals("end")) {
 										System.out.println("Connection closed");
@@ -157,19 +151,12 @@ public class Connector {
 			});
 			job.start();
 
-//			try {
-//				job.join();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Server unavailable or not found");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Server unavailable");
 		}
 	}
 
